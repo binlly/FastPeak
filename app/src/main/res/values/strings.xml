@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">FastPeak</string>
+    <string name="app_name">Gankee</string>
 
     <!-- test -->
+    <string name="transform_name_photo">photo_%1$d</string>
+
     <string name="test_title">工程模式</string>
+    <string name="home_fragment_title">HomeFragment</string>
+    <string name="girl_fragment_title">GirlFragment</string>
 
 </resources>

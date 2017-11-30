@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<template
+    format="5"
+    revision="5"
+    name="Mvp List Fragment"
+    minApi="15"
+    minBuildApi="15"
+    description="Creates a Mvp Module of Fragment">
+
+    <category value="Mvp" />
+    <formfactor value="Mobile" />
+
+    <parameter
+        id="moduleName"
+        name="Mvp Module Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="Demo"
+        help="The name of the mvp module to create" />
+
+    <parameter
+        id="generateLayout"
+        name="Generate Layout File"
+        type="boolean"
+        default="true"
+        help="If true, a layout file will be generated" />
+
+    <parameter
+        id="layoutName"
+        name="Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="fragment_${classToResource(moduleName)}"
+        default="activity_demo"
+        visibility="generateLayout"
+        help="The name of the layout to create for the mvp" />
+
+    <parameter
+        id="packageName"
+        name="Package name"
+        type="string"
+        constraints="package"
+        default="com.mycompany.myapp" />
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>

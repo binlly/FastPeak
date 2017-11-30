@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.binlly.fastpeak">
+    package="com.binlly.gankee">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -24,23 +24,29 @@
             android:value="1"/>
 
         <activity
-            android:name=".business.demo.activity.DemoActivity"
-            android:theme="@style/PrimaryTheme">
+            android:name=".business.home.HomeActivity"
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".business.demo.fragment.DemoFragmentActivity"
+            android:name=".business.web.WebActivity"
             android:theme="@style/PrimaryTheme"/>
+
+        <activity
+            android:name=".business.photo.PhotoViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/PhotoViewerTheme"/>
+
         <activity
             android:name=".business.test.TestActivity"
             android:theme="@style/PrimaryTheme"/>
-        <activity
-            android:name=".business.web.WebListActivity"
-            android:theme="@style/PrimaryTheme"/>
+
     </application>
 
 </manifest>

@@ -1,2 +1,4 @@
 # FastPeak
-Android快速开发框架，基于MVP、Kotlin开发，旨在实现快速开发，进行最新技术的尝试积淀
+####基于FastPeak，实现一款清(sao)新(qi)脱(shi)俗(zu)的干货集中营App
+
+#####感谢干货集中营提供的API (http://gank.io/api)
