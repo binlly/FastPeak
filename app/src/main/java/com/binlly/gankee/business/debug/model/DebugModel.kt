@@ -1,10 +1,10 @@
-package com.binlly.gankee.business.test.model
+package com.binlly.gankee.business.debug.model
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 
 import java.io.Serializable
 
-class TestModel: MultiItemEntity, Serializable {
+class DebugModel: MultiItemEntity, Serializable {
     var item_type: Int = 0
 
     val isSectionType: Boolean

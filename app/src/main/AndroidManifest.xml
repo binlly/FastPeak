@@ -44,7 +44,7 @@
             android:theme="@style/PhotoViewerTheme"/>
 
         <activity
-            android:name=".business.test.TestActivity"
+            android:name=".business.debug.DebugActivity"
             android:theme="@style/PrimaryTheme"/>
 
     </application>
