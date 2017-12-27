@@ -21,6 +21,7 @@
     <style name="PrimaryTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="textColor">@color/textColor</item>
         <item name="textColorGray">@color/textColorGray</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="FullScreenTheme" parent="PrimaryTheme">
