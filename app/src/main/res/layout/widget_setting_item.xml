@@ -44,6 +44,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <View
+        android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1px"
         android:background="@color/divider_color"

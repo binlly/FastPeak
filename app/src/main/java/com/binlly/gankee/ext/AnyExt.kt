@@ -9,3 +9,7 @@ import com.google.gson.Gson
 private val gson by lazy { Gson() }
 
 fun Any.toJson(): String = gson.toJson(this)
+
+val Any.simpleName: String
+    get() = this::class.java.simpleName
+

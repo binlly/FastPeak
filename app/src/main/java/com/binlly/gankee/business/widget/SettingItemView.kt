@@ -25,17 +25,20 @@ class SettingItemView @JvmOverloads constructor(
     private var drawable: Drawable? = null
     private var name: String? = null
     private var showArrow = false
+    private var showDivider = true
 
     override fun initAttributes(a: TypedArray) {
         drawable = a.getDrawable(R.styleable.SettingItemView_settingItemIcon)
         name = a.getString(R.styleable.SettingItemView_settingItemName)
         showArrow = a.getBoolean(R.styleable.SettingItemView_showArrow, false)
+        showDivider = a.getBoolean(R.styleable.SettingItemView_showDivider, true)
     }
 
     override fun initData(context: Context) {
         setName(name)
         setIcon(drawable)
         if (showArrow) showArrow() else hideArrow()
+        if (showDivider) showDivider() else showDivider()
     }
 
     fun setIcon(drawable: Drawable?) {
@@ -56,6 +59,14 @@ class SettingItemView @JvmOverloads constructor(
 
     fun hideArrow() {
         arrow.visibility = View.GONE
+    }
+
+    fun showDivider() {
+        divider.visibility = View.VISIBLE
+    }
+
+    fun hideDivider() {
+        divider.visibility = View.GONE
     }
 
     fun onClick(op: () -> Unit) {

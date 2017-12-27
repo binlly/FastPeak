@@ -6,8 +6,6 @@ import com.binlly.gankee.business.home.FeedAll
 import io.reactivex.Observer
 
 object HomeRepo {
-    private val TAG = HomeRepo::class.java.simpleName
-
     private val mService = RetrofitManager.create(HomeService::class.java)
     private val mMockService = RetrofitManager.createMock(HomeService::class.java)
     private val mServiceProxy = DynamicProxy(mService, mMockService).getProxy<HomeService>()

@@ -2,6 +2,8 @@ package com.binlly.gankee.di
 
 import com.binlly.gankee.business.girl.GirlFragment
 import com.binlly.gankee.business.girl.GirlPresenter
+import com.binlly.gankee.business.history.HistoryActivity
+import com.binlly.gankee.business.history.HistoryPresenter
 import com.binlly.gankee.business.home.HomeFragment
 import com.binlly.gankee.business.home.HomePresenter
 import dagger.Module
@@ -29,5 +31,10 @@ class PresenterModules {
     @Provides
     fun provideGirlPresenter(fragment: GirlFragment): GirlPresenter {
         return GirlPresenter(fragment.context, fragment)
+    }
+
+    @Provides
+    fun provideHistoryPresenter(activity: HistoryActivity): HistoryPresenter {
+        return HistoryPresenter(activity, activity)
     }
 }

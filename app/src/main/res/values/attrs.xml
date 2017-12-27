@@ -10,6 +10,7 @@
         <attr name="settingItemName" format="string"/>
         <attr name="settingItemIcon" format="reference"/>
         <attr name="showArrow" format="boolean"/>
+        <attr name="showDivider" format="boolean"/>
     </declare-styleable>
 
 </resources>

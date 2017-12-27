@@ -13,7 +13,7 @@ import com.fangxin.assessment.base.adapter.ItemViewDelegate
 /**
  * Created by yy on 2017/11/16.
  */
-class OtherDelegate(val adapter: HomeAdapter): ItemViewDelegate<FeedAll, BaseViewHolder> {
+class HistoryDelegate(val adapter: HistoryAdapter): ItemViewDelegate<FeedAll, BaseViewHolder> {
 
     override fun getItemViewLayoutId(): Int = R.layout.item_home_other
 

@@ -3,7 +3,6 @@
 
 ### [感谢干货集中营提供的API](http://gank.io/api)
 
-![image1](arts/home.png)
-![image2](arts/girl.png)
-![image3](arts/article.png)
-![image4](arts/preview.png)
+![image1](arts/home.png) ![image1](arts/home1.png)
+![image2](arts/girl.png) ![image4](arts/preview.png)
+![image3](arts/article.png) ![image4](arts/mine.png)

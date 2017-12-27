@@ -17,7 +17,8 @@ data class FeedAll(
         @SerializedName("url") val url: String?, //http://www.jianshu.com/p/1f10d5477566
         @SerializedName("used") val used: Boolean?, //true
         @SerializedName("who") val who: String?, //
-        @SerializedName("images") val images: List<String>?
+        @SerializedName("images") val images: List<String>?, //
+        @SerializedName("browseAt") val browseAt: Long?
 ): MultiItemEntity, IModel {
 
     override fun getItemType(): Int {

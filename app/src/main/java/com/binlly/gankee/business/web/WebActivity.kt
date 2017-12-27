@@ -2,9 +2,7 @@ package com.binlly.gankee.business.web
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.webkit.WebChromeClient
-import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.binlly.gankee.R
@@ -42,9 +40,9 @@ class WebActivity: BaseActivity() {
         webview.settings.builtInZoomControls = true
         webview.settings.domStorageEnabled = true
         webview.settings.setGeolocationEnabled(true)
-        webview.settings.cacheMode = WebSettings.LOAD_NO_CACHE
+//        webview.settings.cacheMode = WebSettings.LOAD_NO_CACHE
         webview.settings.useWideViewPort = true
-        webview.setLayerType(View.LAYER_TYPE_NONE, null)
+//        webview.setLayerType(View.LAYER_TYPE_NONE, null)
         webview.webChromeClient = WebChromeClient()
         webview.webViewClient = WebViewClient()
     }

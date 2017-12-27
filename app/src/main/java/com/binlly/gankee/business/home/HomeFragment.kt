@@ -1,5 +1,6 @@
 package com.binlly.gankee.business.home
 
+import android.content.ContentValues
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import com.binlly.gankee.R
@@ -8,6 +9,7 @@ import com.binlly.gankee.base.widget.divider.divider.HorizontalDividerItemDecora
 import com.binlly.gankee.business.home.adapter.HomeAdapter
 import com.binlly.gankee.business.web.WebActivity
 import com.binlly.gankee.ext.getColor
+import com.binlly.gankee.repo.database
 import com.chad.library.adapter.base.BaseQuickAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -29,6 +31,22 @@ class HomeFragment: BaseMvpFragment<HomePresenter>(), HomeContract.View,
         adapter.setMessageHandler { action, _, item: FeedAll?, _ ->
             when (action) {
                 HomeAdapter.ACTION_TO_WEB -> item?.let {
+                    val db = context.database.writableDatabase
+                    context.database.use {
+                        val values = ContentValues()
+//                        values.put("id", item.id)
+                        values.put("_id", item.id)
+                        values.put("createdAt", item.createdAt)
+                        values.put("desc", item.desc)
+                        values.put("publishedAt", item.publishedAt)
+                        values.put("source", item.source)
+                        values.put("type", item.type)
+                        values.put("url", item.url)
+                        values.put("who", item.who)
+                        values.put("image_url", item.images?.get(0))
+                        values.put("browseAt", System.currentTimeMillis())
+                        db.insert("browse_history", null, values)
+                    }
                     val intent = Intent(context, WebActivity::class.java)
                     intent.putExtra("url", item.url)
                     intent.putExtra("title", item.desc)
