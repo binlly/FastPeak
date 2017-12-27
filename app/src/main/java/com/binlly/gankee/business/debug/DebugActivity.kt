@@ -1,4 +1,4 @@
-package com.binlly.gankee.business.test
+package com.binlly.gankee.business.debug
 
 import android.os.Bundle
 import com.binlly.gankee.R
@@ -9,14 +9,14 @@ import com.binlly.gankee.base.mvp.BaseActivity
  * Created by wsl on 17/5/12.
  */
 
-class TestActivity: BaseActivity() {
+class DebugActivity: BaseActivity() {
 
     override fun getContentView(): Int {
         return R.layout.activity_test
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        val testFragment = TestFragment()
+        val testFragment = DebugFragment()
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.contentContainer, testFragment, "test_for_tool_mode")
         ft.commitAllowingStateLoss()

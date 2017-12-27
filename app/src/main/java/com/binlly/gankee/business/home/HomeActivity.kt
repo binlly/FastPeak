@@ -14,7 +14,6 @@ class HomeActivity: BaseActivity() {
     override fun getContentView(): Int = R.layout.activity_home
 
     override fun initView(savedInstanceState: Bundle?) {
-
         tab_layout.removeAllTabs()
         val adapter = HomePagerAdapter(supportFragmentManager)
         for (tab in adapter.tabs()) {

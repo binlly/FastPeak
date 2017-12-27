@@ -32,21 +32,20 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".business.web.WebActivity"
             android:theme="@style/PrimaryTheme"/>
-
         <activity
             android:name=".business.photo.PhotoViewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/PhotoViewerTheme"/>
-
         <activity
-            android:name=".business.test.TestActivity"
+            android:name=".business.debug.DebugActivity"
             android:theme="@style/PrimaryTheme"/>
-
+        <activity
+            android:name=".business.history.HistoryActivity"
+            android:theme="@style/PrimaryTheme"/>
     </application>
 
 </manifest>

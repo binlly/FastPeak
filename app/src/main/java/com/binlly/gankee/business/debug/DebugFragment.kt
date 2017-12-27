@@ -1,4 +1,4 @@
-package com.binlly.gankee.business.test
+package com.binlly.gankee.business.debug
 
 import android.graphics.Color
 import android.os.Bundle
@@ -11,8 +11,8 @@ import com.binlly.gankee.R
 import com.binlly.gankee.base.Device
 import com.binlly.gankee.base.mvp.BaseFragment
 import com.binlly.gankee.base.net.RetrofitConfig
-import com.binlly.gankee.business.test.adapter.TestAdapter
-import com.binlly.gankee.business.test.model.TestModel
+import com.binlly.gankee.business.debug.adapter.TestAdapter
+import com.binlly.gankee.business.debug.model.DebugModel
 import com.binlly.gankee.repo.RemoteRepo
 import com.binlly.gankee.service.Services
 import kotlinx.android.synthetic.main.fragment_test.*
@@ -23,7 +23,7 @@ import java.util.*
  * Created by songshimin on 3/13/17.
  */
 
-class TestFragment: BaseFragment() {
+class DebugFragment: BaseFragment() {
     private lateinit var mAdapter: TestAdapter
 
     override fun handleArguments(arg: Bundle?) {
@@ -47,9 +47,9 @@ class TestFragment: BaseFragment() {
         mAdapter.setNewData(testData)
     }
 
-    private val testData: List<TestModel>
+    private val testData: List<DebugModel>
         get() {
-            val datas = ArrayList<TestModel>()
+            val datas = ArrayList<DebugModel>()
             datas.add(getSection("选择环境"))
 
             datas.add(getEnvModel(ENV_DEBUG, "测试环境"))
@@ -79,46 +79,46 @@ class TestFragment: BaseFragment() {
             return datas
         }
 
-    private fun getSection(text: String): TestModel {
-        val model = TestModel()
+    private fun getSection(text: String): DebugModel {
+        val model = DebugModel()
         model.section = text
-        model.item_type = TestModel.TYPE_SECTION
+        model.item_type = DebugModel.TYPE_SECTION
         return model
     }
 
-    private fun getEnvModel(key: String, value: String): TestModel {
+    private fun getEnvModel(key: String, value: String): DebugModel {
         val env = Build.env
-        val model = TestModel()
-        val envModel = TestModel.EnvModel(key, value, env == key)
+        val model = DebugModel()
+        val envModel = DebugModel.EnvModel(key, value, env == key)
         model.env = envModel
-        model.item_type = TestModel.TYPE_ENV
+        model.item_type = DebugModel.TYPE_ENV
         return model
     }
 
-    private fun getBuildModel(key: String, value: String): TestModel {
-        val model = TestModel()
-        val buildModel = TestModel.BuildModel(key, value)
+    private fun getBuildModel(key: String, value: String): DebugModel {
+        val model = DebugModel()
+        val buildModel = DebugModel.BuildModel(key, value)
         model.valueColor = Color.parseColor("#222222")
         model.build = buildModel
-        model.item_type = TestModel.TYPE_BUILD
+        model.item_type = DebugModel.TYPE_BUILD
         return model
     }
 
-    private fun getMockModel(key: String, value: String): TestModel {
-        val model = TestModel()
-        val mockModel = TestModel.MockModel(key, value)
+    private fun getMockModel(key: String, value: String): DebugModel {
+        val model = DebugModel()
+        val mockModel = DebugModel.MockModel(key, value)
         model.valueColor = Color.parseColor("#222222")
         model.mock = mockModel
-        model.item_type = TestModel.TYPE_MOCK
+        model.item_type = DebugModel.TYPE_MOCK
         return model
     }
 
-    private fun getRouterModel(key: String, value: String): TestModel {
-        val model = TestModel()
-        val mockModel = TestModel.RouterModel(key, value)
+    private fun getRouterModel(key: String, value: String): DebugModel {
+        val model = DebugModel()
+        val mockModel = DebugModel.RouterModel(key, value)
         model.valueColor = Color.parseColor("#222222")
         model.router = mockModel
-        model.item_type = TestModel.TYPE_ROUTER
+        model.item_type = DebugModel.TYPE_ROUTER
         return model
     }
 }

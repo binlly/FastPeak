@@ -1,4 +1,4 @@
-package com.binlly.gankee.business.test.adapter
+package com.binlly.gankee.business.debug.adapter
 
 import android.content.Context
 import android.graphics.Color
@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.binlly.gankee.Build
 import com.binlly.gankee.R
 import com.binlly.gankee.base.adapter.BaseDelegate
-import com.binlly.gankee.business.test.model.TestModel
+import com.binlly.gankee.business.debug.model.DebugModel
 import com.binlly.gankee.service.Services
 import com.chad.library.adapter.base.BaseViewHolder
 
@@ -19,14 +19,14 @@ import com.chad.library.adapter.base.BaseViewHolder
  * Created by binlly on 2017/5/13.
  */
 
-class EnvDelegate(context: Context): BaseDelegate<TestModel>(context) {
+class EnvDelegate(context: Context): BaseDelegate<DebugModel>(context) {
 
     private var dialog: AlertDialog? = null
 
     override val layoutResId: Int
         get() = R.layout.test_item_switch_env
 
-    override fun childConvert(holder: BaseViewHolder, item: TestModel) {
+    override fun childConvert(holder: BaseViewHolder, item: DebugModel) {
         val text = holder.getView<TextView>(R.id.env_name)
         val icon = holder.getView<ImageView>(R.id.env_selected)
 
@@ -41,7 +41,7 @@ class EnvDelegate(context: Context): BaseDelegate<TestModel>(context) {
         holder.itemView.setOnClickListener { showDialog(item.env) }
     }
 
-    private fun showDialog(env: TestModel.EnvModel) {
+    private fun showDialog(env: DebugModel.EnvModel) {
         if (dialog == null) {
             val pre = "切换到"
             val suf = "需要杀掉进程重启"

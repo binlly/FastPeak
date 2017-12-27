@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/view_top"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="#00e080"
+            android:gravity="center"
+            android:text="Gankee"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            android:textStyle="bold"/>
+
+        <com.binlly.gankee.business.widget.SettingItemView
+            android:id="@+id/item_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:settingItemIcon="@mipmap/ic_setting_history"
+            app:settingItemName="浏览历史"
+            app:showArrow="true"/>
+
+        <com.binlly.gankee.business.widget.SettingItemView
+            android:id="@+id/item_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:settingItemIcon="@mipmap/ic_setting_cache"
+            app:settingItemName="清除缓存"
+            app:showArrow="true"/>
+
+        <com.binlly.gankee.business.widget.SettingItemView
+            android:id="@+id/item_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:settingItemIcon="@mipmap/ic_setting_version"
+            app:settingItemName="版本信息"
+            app:showArrow="true"
+            app:showDivider="false"/>
+
+        <com.binlly.gankee.business.widget.SettingItemView
+            android:id="@+id/item_github"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            app:settingItemIcon="@mipmap/ic_setting_github"
+            app:settingItemName="GitHub"
+            app:showArrow="true"/>
+
+        <com.binlly.gankee.business.widget.SettingItemView
+            android:id="@+id/item_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:settingItemIcon="@mipmap/ic_setting_email"
+            app:settingItemName="binlly67@gmail.com"
+            app:showArrow="false"
+            app:showDivider="false"/>
+
+    </LinearLayout>
+
+</ScrollView>

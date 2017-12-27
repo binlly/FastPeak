@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <declare-styleable name="DayNight">
         <attr name="textColor" format="color"/>
         <attr name="textColorGray" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="SettingItemView">
+        <attr name="settingItemName" format="string"/>
+        <attr name="settingItemIcon" format="reference"/>
+        <attr name="showArrow" format="boolean"/>
+        <attr name="showDivider" format="boolean"/>
+    </declare-styleable>
+
 </resources>

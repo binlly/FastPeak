@@ -1,11 +1,12 @@
 package com.binlly.gankee.repo
 
-import com.binlly.gankee.repo.service.RemoteService
 import com.binlly.gankee.base.PREFERENCE_NAME_REMOTE_CONFIG
 import com.binlly.gankee.base.Preference
 import com.binlly.gankee.base.net.ReqParams
 import com.binlly.gankee.base.net.RetrofitManager
 import com.binlly.gankee.base.rx.IoTransformer
+import com.binlly.gankee.ext.simpleName
+import com.binlly.gankee.repo.service.RemoteService
 import com.binlly.gankee.service.Services
 import com.binlly.gankee.service.remoteconfig.RemoteMockModel
 import io.reactivex.Observer
@@ -17,8 +18,6 @@ import kotlin.reflect.KProperty
  * Created by yy on 2017/10/10.
  */
 object RemoteRepo {
-    private val TAG = RemoteRepo::class.java.simpleName
-
     const val PREFERENCE_KEY_HOST = "host"
 
     var mockHost: String by MockHostDelegate()
@@ -26,7 +25,7 @@ object RemoteRepo {
     var mService = mRetrofit.create(RemoteService::class.java)
 
     fun requestMock(observer: Observer<RemoteMockModel>) {
-        val params = ReqParams(TAG)
+        val params = ReqParams(simpleName)
         try {
             mService.requestMock(params.getFieldMap()).compose(IoTransformer()).subscribe(observer)
         } catch (e: Exception) {
@@ -35,8 +34,10 @@ object RemoteRepo {
     }
 
     class MockHostDelegate: ReadWriteProperty<Any?, String> {
-        private var host: String by Preference(Services.app, PREFERENCE_NAME_REMOTE_CONFIG,
-                RemoteRepo.PREFERENCE_KEY_HOST, "http://127.0.0.1")
+        private var host: String by Preference(Services.app,
+                PREFERENCE_NAME_REMOTE_CONFIG,
+                RemoteRepo.PREFERENCE_KEY_HOST,
+                "http://127.0.0.1")
 
         override fun getValue(thisRef: Any?, property: KProperty<*>): String {
             return host
@@ -46,8 +47,7 @@ object RemoteRepo {
             if (host == value) return
             host = value
             RemoteRepo.mRetrofit = RetrofitManager.createRetrofit(host)
-            RemoteRepo.mService = RemoteRepo.mRetrofit.create(
-                    RemoteService::class.java)
+            RemoteRepo.mService = RemoteRepo.mRetrofit.create(RemoteService::class.java)
             Services.remoteConfig().pullMockConfig({}) //改变地址之后重新拉取并更新mock配置
         }
     }
