@@ -19,7 +19,7 @@ abstract class BaseFragment: Fragment(), BaseView {
 
     val logger = Logger()
 
-    private val loadingDia: LoadingProgressDialog by lazy { LoadingProgressDialog(context) }
+    private val loadingDia: LoadingProgressDialog by lazy { LoadingProgressDialog(context!!) }
     private lateinit var loadingPage: LoadingPage
 
     override fun onAttach(context: Context?) {
@@ -33,9 +33,9 @@ abstract class BaseFragment: Fragment(), BaseView {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        loadingPage = object: LoadingPage(context) {
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        loadingPage = object: LoadingPage(context!!) {
             override fun createLoadingView(): View {
                 return this@BaseFragment.loadingView
             }
@@ -112,7 +112,7 @@ abstract class BaseFragment: Fragment(), BaseView {
 
     override fun hideLoading() {
         activity?.let {
-            if (activity.isFinishing) return else loadingDia.dismiss()
+            if (activity!!.isFinishing) return else loadingDia.dismiss()
         } ?: return
     }
 

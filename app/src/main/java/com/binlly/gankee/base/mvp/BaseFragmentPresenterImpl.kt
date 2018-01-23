@@ -3,7 +3,7 @@ package com.binlly.gankee.base.mvp
 import android.content.Context
 import android.os.Bundle
 
-open class BaseFragmentPresenterImpl<out V: BaseView>(val context: Context, private val mView: V):
+open class BaseFragmentPresenterImpl<out V: BaseView>(val context: Context?, private val mView: V):
         BaseFragmentPresenter {
 
     fun V(): V = mView

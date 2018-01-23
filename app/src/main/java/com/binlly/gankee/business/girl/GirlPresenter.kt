@@ -6,7 +6,7 @@ import com.binlly.gankee.base.rx.RxObserver
 import com.binlly.gankee.repo.GirlRepo
 
 class GirlPresenter(
-        context: Context, mView: GirlContract.View
+        context: Context?, mView: GirlContract.View
 ): BaseFragmentPresenterImpl<GirlContract.View>(context, mView), GirlContract.Presenter {
 
     override fun requestGirls(page: Int, observer: RxObserver<List<FeedGirl>?>) {

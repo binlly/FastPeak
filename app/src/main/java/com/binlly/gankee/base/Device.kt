@@ -303,9 +303,9 @@ object Device {
 
     class AppStatus {
         companion object {
-            val ACTIVE = "active"
-            val BACKGROUND = "background"
-            val OTHER = "other"
+            const val ACTIVE = "active"
+            const val BACKGROUND = "background"
+            const val OTHER = "other"
         }
     }
 }

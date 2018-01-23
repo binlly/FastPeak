@@ -21,8 +21,7 @@ import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 
 
-class GirlFragment: BaseMvpFragment<GirlPresenter>(), GirlContract.View,
-                    BaseQuickAdapter.RequestLoadMoreListener {
+class GirlFragment: BaseMvpFragment<GirlPresenter>(), GirlContract.View, BaseQuickAdapter.RequestLoadMoreListener {
 
     private lateinit var adapter: GirlAdapter
 
@@ -42,15 +41,12 @@ class GirlFragment: BaseMvpFragment<GirlPresenter>(), GirlContract.View,
                 GirlAdapter.ACTION_TO_PREVIEW -> {
                     val intent = Intent(context, PhotoViewActivity::class.java)
                     intent.putExtra("position", position)
-                    intent.putStringArrayListExtra("photo_list",
-                            getPhotoList() as ArrayList<String>?)
+                    intent.putStringArrayListExtra("photo_list", getPhotoList() as ArrayList<String>?)
                     enterPosition = position
                     exitPosition = position
                     try {
                         val activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                context as Activity,
-                                view as View,
-                                getString(R.string.transform_name_photo, position))
+                                context as Activity, view as View, getString(R.string.transform_name_photo, position))
                         startActivity(intent, activityOptionsCompat.toBundle())
                     } catch (e: Exception) {
                         startActivity(intent)
@@ -74,7 +70,9 @@ class GirlFragment: BaseMvpFragment<GirlPresenter>(), GirlContract.View,
     }
 
     private fun setExitSharedElementCallback() {
-        ActivityCompat.setExitSharedElementCallback(activity, object: SharedElementCallback() {
+        val act = activity
+        act ?: return
+        ActivityCompat.setExitSharedElementCallback(act, object: SharedElementCallback() {
             override fun onMapSharedElements(
                     names: MutableList<String>, sharedElements: MutableMap<String, View>
             ) {
@@ -85,10 +83,10 @@ class GirlFragment: BaseMvpFragment<GirlPresenter>(), GirlContract.View,
                     if (view != null) {
                         view.transitionName = getString(R.string.transform_name_photo, exitPosition)
                         names.add(view.transitionName)
-                        sharedElements.put(view.transitionName, view)
+                        sharedElements[view.transitionName] = view
                     }
                 }
-                ActivityCompat.setExitSharedElementCallback(activity, null)
+                ActivityCompat.setExitSharedElementCallback(act, null)
             }
         })
     }

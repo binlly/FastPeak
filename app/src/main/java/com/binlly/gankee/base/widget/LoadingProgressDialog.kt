@@ -12,8 +12,7 @@ import com.binlly.gankee.R
  * Created by yy on 2017/8/24.
  */
 
-class LoadingProgressDialog(private val mContext: Context): Dialog(mContext,
-        R.style.LoadingDialog) {
+class LoadingProgressDialog(private val mContext: Context): Dialog(mContext, R.style.LoadingDialog) {
     private lateinit var tv_info: TextView
 
     init {

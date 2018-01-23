@@ -46,10 +46,10 @@ class DebugModel: MultiItemEntity, Serializable {
     companion object {
         private const val serialVersionUID = -4241242337755076267L
 
-        val TYPE_SECTION = 0
-        val TYPE_ENV = 1
-        val TYPE_BUILD = 2
-        val TYPE_MOCK = 3
-        val TYPE_ROUTER = 4
+        const val TYPE_SECTION = 0
+        const val TYPE_ENV = 1
+        const val TYPE_BUILD = 2
+        const val TYPE_MOCK = 3
+        const val TYPE_ROUTER = 4
     }
 }

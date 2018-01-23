@@ -14,7 +14,7 @@ import com.binlly.gankee.tools.MultiClicker
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_mine.*
 import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -39,26 +39,28 @@ class MineFragment: BaseFragment() {
         //多次点击进入工程模式
         val multiClicker = MultiClicker()
         multiClicker.onMultiClick(view = view_top) {
-            context.startActivity<DebugActivity>()
+            context?.startActivity<DebugActivity>()
         }
 
         item_version.onClick {
-            context.toast("当前版本是 ${BuildConfig.VERSION_NAME}")
+            context?.toast("当前版本是 ${BuildConfig.VERSION_NAME}")
         }
 
         item_cache.onClick {
-            val db = context.database.writableDatabase
-            async(UI) {
-                bg {
-                    db.use { db.delete("browse_history", null, null) }
+            val db = context?.database?.writableDatabase
+
+            launch(UI) {
+                val deferred = bg {
+                    db.use { db?.delete("browse_history", null, null) }
                     Glide.get(Services.app).clearDiskCache()
+                    "清除缓存成功"
                 }
-                getContext().toast("清除缓存成功")
+                getContext()?.toast(deferred.await())
             }
         }
 
         item_history.onClick {
-            context.startActivity<HistoryActivity>()
+            context?.startActivity<HistoryActivity>()
         }
 
         item_github.onClick {

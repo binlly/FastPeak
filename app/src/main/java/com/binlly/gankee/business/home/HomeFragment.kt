@@ -13,8 +13,7 @@ import com.binlly.gankee.repo.database
 import com.chad.library.adapter.base.BaseQuickAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment: BaseMvpFragment<HomePresenter>(), HomeContract.View,
-                    BaseQuickAdapter.RequestLoadMoreListener {
+class HomeFragment: BaseMvpFragment<HomePresenter>(), HomeContract.View, BaseQuickAdapter.RequestLoadMoreListener {
 
     private lateinit var adapter: HomeAdapter
 
@@ -25,27 +24,28 @@ class HomeFragment: BaseMvpFragment<HomePresenter>(), HomeContract.View,
         adapter.setOnLoadMoreListener(this, recycler)
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = adapter
-        recycler.addItemDecoration(HorizontalDividerItemDecoration.Builder(context).size(1).color(
-                getColor(R.color.divider_color)).build())
+        recycler.addItemDecoration(
+                HorizontalDividerItemDecoration.Builder(context).size(1).color(getColor(R.color.divider_color)).build())
 
         adapter.setMessageHandler { action, _, item: FeedAll?, _ ->
             when (action) {
                 HomeAdapter.ACTION_TO_WEB -> item?.let {
-                    val db = context.database.writableDatabase
-                    context.database.use {
-                        val values = ContentValues()
-//                        values.put("id", item.id)
-                        values.put("_id", item.id)
-                        values.put("createdAt", item.createdAt)
-                        values.put("desc", item.desc)
-                        values.put("publishedAt", item.publishedAt)
-                        values.put("source", item.source)
-                        values.put("type", item.type)
-                        values.put("url", item.url)
-                        values.put("who", item.who)
-                        values.put("image_url", item.images?.get(0))
-                        values.put("browseAt", System.currentTimeMillis())
-                        db.insert("browse_history", null, values)
+                    val db = context?.database?.writableDatabase
+                    context?.database?.use {
+                        val values = ContentValues().apply {
+                            //                        values.put("id", item.id)
+                            put("_id", item.id)
+                            put("createdAt", item.createdAt)
+                            put("desc", item.desc)
+                            put("publishedAt", item.publishedAt)
+                            put("source", item.source)
+                            put("type", item.type)
+                            put("url", item.url)
+                            put("who", item.who)
+                            put("image_url", item.images?.get(0))
+                            put("browseAt", System.currentTimeMillis())
+                        }
+                        db?.insert("browse_history", null, values)
                     }
                     val intent = Intent(context, WebActivity::class.java)
                     intent.putExtra("url", item.url)

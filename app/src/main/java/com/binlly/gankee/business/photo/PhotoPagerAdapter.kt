@@ -24,9 +24,9 @@ class PhotoPagerAdapter(val activity: PhotoViewActivity, val list: List<String>)
         return photoView
     }
 
-    override fun isViewFromObject(view: View?, obj: Any?): Boolean = view === obj
+    override fun isViewFromObject(view: View, obj: Any): Boolean = view === obj
 
-    override fun destroyItem(container: ViewGroup, position: Int, obj: Any?) {
-        container.removeView(obj as View?)
+    override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
+        container.removeView(obj as View)
     }
 }

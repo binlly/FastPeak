@@ -1,6 +1,7 @@
 package com.binlly.gankee.ext
 
 import android.util.TypedValue
+import android.util.TypedValue.COMPLEX_UNIT_DIP
 import com.binlly.gankee.service.Services
 
 /**
@@ -8,7 +9,7 @@ import com.binlly.gankee.service.Services
  */
 
 fun Int.dp2px(): Int {
-    return TypedValue.applyDimension(1,
+    return TypedValue.applyDimension(COMPLEX_UNIT_DIP,
             this.toFloat(),
             Services.app().resources.displayMetrics).toInt()
 }

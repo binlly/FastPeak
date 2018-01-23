@@ -10,9 +10,9 @@ import com.fangxin.assessment.base.adapter.MultipleItemAdapter
 class HistoryAdapter: MultipleItemAdapter<FeedAll>(null) {
 
     companion object {
-        val TYPE_OTHER = 2
+        const val TYPE_OTHER = 2
 
-        val ACTION_TO_WEB = 1
+        const val ACTION_TO_WEB = 1
     }
 
     init {
