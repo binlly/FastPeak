@@ -3,7 +3,7 @@ import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.repositories
 
 buildscript {
-    extra["kotlin_version"] = "1.1.4-2"
+    extra["kotlin_version"] = "1.2.30"
 
     dependencies {
         classpath("com.android.tools.build:gradle:3.0.0-beta2")
