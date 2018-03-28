@@ -10,14 +10,18 @@ import dagger.android.ContributesAndroidInjector
 /**
  * Created by yy on 2017/8/24.
  */
-@Module abstract class AllModules {
+@Module
+abstract class AllModules {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(PresenterModules::class)) abstract fun contributeHomeFragmentInjector(): HomeFragment
+    @ContributesAndroidInjector(modules = [PresenterModules::class])
+    abstract fun contributeHomeFragmentInjector(): HomeFragment
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(PresenterModules::class)) abstract fun contributeGirlFragmentInjector(): GirlFragment
+    @ContributesAndroidInjector(modules = [PresenterModules::class])
+    abstract fun contributeGirlFragmentInjector(): GirlFragment
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(PresenterModules::class)) abstract fun contributeHistoryActivityInjector(): HistoryActivity
+    @ContributesAndroidInjector(modules = [PresenterModules::class])
+    abstract fun contributeHistoryActivityInjector(): HistoryActivity
 }

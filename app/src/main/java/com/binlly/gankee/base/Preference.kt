@@ -4,8 +4,8 @@ import android.content.Context
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class Preference<T>(val context: Context, private val which: String, val key: String,
-                    private val default: T): ReadWriteProperty<Any?, T> {
+class Preference<T>(val context: Context, private val which: String, val key: String, private val default: T):
+        ReadWriteProperty<Any?, T> {
 
     private val prefs by lazy {
         context.getSharedPreferences(which, Context.MODE_PRIVATE)

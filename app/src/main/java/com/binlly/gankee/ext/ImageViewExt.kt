@@ -35,8 +35,7 @@ fun ImageView.loadNoCache(
         listener: OnGlideImageViewListener? = null,
         onReady: ((resource: Drawable?, e: GlideException?) -> Boolean)? = null
 ) {
-    val options = RequestOptions().placeholder(holder).error(holder).diskCacheStrategy(
-            DiskCacheStrategy.NONE)
+    val options = RequestOptions().placeholder(holder).error(holder).diskCacheStrategy(DiskCacheStrategy.NONE)
     load(uri, options, null, listener, onReady)
 }
 
@@ -101,7 +100,10 @@ fun ImageView.load(
         }
 
         override fun onLoadFailed(
-                e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
         ): Boolean {
             listener?.let { ProgressManager.removeProgressListener(this@load) }
             onReady ?: return false
@@ -110,7 +112,10 @@ fun ImageView.load(
     }).into(this)
 }
 
-private fun addListener(imageView: ImageView, listener: OnGlideImageViewListener?) {
+private fun addListener(
+        imageView: ImageView,
+        listener: OnGlideImageViewListener?
+) {
     listener?.let {
         val internalProgressListener = object: OnProgressListener {
             override fun onProgress(
