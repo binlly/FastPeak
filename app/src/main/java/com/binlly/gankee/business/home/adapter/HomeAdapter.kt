@@ -10,10 +10,10 @@ import com.fangxin.assessment.base.adapter.MultipleItemAdapter
 class HomeAdapter: MultipleItemAdapter<FeedAll>(null) {
 
     companion object {
-        val TYPE_GIRL = 1
-        val TYPE_OTHER = 2
+        const val TYPE_GIRL = 1
+        const val TYPE_OTHER = 2
 
-        val ACTION_TO_WEB = 1
+        const val ACTION_TO_WEB = 1
     }
 
     init {

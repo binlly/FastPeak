@@ -35,7 +35,7 @@ class DebugFragment: BaseFragment() {
     }
 
     override fun initView() {
-        mAdapter = TestAdapter(context, null, this)
+        mAdapter = TestAdapter(context!!, null, this)
         recycler.layoutManager = LinearLayoutManager(activity)
         recycler.adapter = mAdapter
 

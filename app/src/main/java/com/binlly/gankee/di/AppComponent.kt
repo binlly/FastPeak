@@ -12,7 +12,8 @@ import javax.inject.Singleton
  * Application 依赖注入器
  */
 @Singleton
-@Component(modules = arrayOf(AllModules::class, AndroidSupportInjectionModule::class))
+@Component(modules = [AllModules::class, AndroidSupportInjectionModule::class])
 interface AppComponent: AndroidInjector<App> {
-    @Component.Builder abstract class Builder: AndroidInjector.Builder<App>()
+    @Component.Builder
+    abstract class Builder: AndroidInjector.Builder<App>()
 }

@@ -31,7 +31,7 @@ class ReqParams(private val TAG: String) {
     fun addParam(key: String, value: Any?) {
         if (null != value) {
             //            value = value.trim();
-            fieldMap.put(key, value)
+            fieldMap[key] = value
         }
     }
 
@@ -50,8 +50,8 @@ class ReqParams(private val TAG: String) {
     fun addQuery(key: String, value: String) {
         var value = value
         value = value.trim { it <= ' ' }
-        queryMap.put(key, value)
-        signMap.put(key, value)
+        queryMap[key] = value
+        signMap[key] = value
     }
 
     /**
@@ -62,13 +62,12 @@ class ReqParams(private val TAG: String) {
     fun getFieldMap(): Map<String, String> {
         val map = HashMap<String, String>()
 
-        map.put("param", Gson().toJson(fieldMap))
+        map["param"] = Gson().toJson(fieldMap)
 
         // TODO: 2017/8/23 统一添加公共头
         // map.put("headers", new Gson().toJson(DeviceUtil.getCommonHeader()));
 
-        Log.d(TAG + "-param--", map["param"])
-        if (printHeaders) Log.w(TAG + "-headers--", map["headers"])
+        Log.d("$TAG-param--", map["param"])
 
         return map
     }
@@ -82,11 +81,9 @@ class ReqParams(private val TAG: String) {
     }
 
     companion object {
-        val GET = "GET"
-        val POST = "POST"
-        val PUT = "PUT"
-        val DELETE = "DELETE"
-
-        private val printHeaders = false
+        const val GET = "GET"
+        const val POST = "POST"
+        const val PUT = "PUT"
+        const val DELETE = "DELETE"
     }
 }

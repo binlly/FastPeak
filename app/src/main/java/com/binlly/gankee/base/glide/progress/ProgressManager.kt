@@ -15,17 +15,17 @@ object ProgressManager {
             val request = chain.request()
             val response = chain.proceed(request)
             response.newBuilder().body(
-                    ProgressResponseBody(request.url().toString(), response.body(),
-                            listener)).build()
+                    ProgressResponseBody(request.url().toString(), response.body(), listener)).build()
         }.build()
     }
 
     private val listener = object: OnProgressListener {
-        override fun onProgress(imageUrl: String, bytesRead: Long, totalBytes: Long,
-                                isDone: Boolean, exception: GlideException?) {
+        override fun onProgress(
+                imageUrl: String, bytesRead: Long, totalBytes: Long, isDone: Boolean, exception: GlideException?
+        ) {
             listeners.forEach { (imageview, listener) ->
-                listener.get()?.onProgress(imageUrl, bytesRead, totalBytes, isDone,
-                        exception) ?: listeners.remove(imageview)
+                listener.get()?.onProgress(imageUrl, bytesRead, totalBytes, isDone, exception) ?: listeners.remove(
+                        imageview)
             }
         }
     }
@@ -33,7 +33,7 @@ object ProgressManager {
     fun addProgressListener(imageView: ImageView, progressListener: OnProgressListener?) {
         progressListener ?: return
         removeProgressListener(imageView)
-        listeners.put(WeakReference(imageView), WeakReference(progressListener))
+        listeners[WeakReference(imageView)] = WeakReference(progressListener)
     }
 
     fun removeProgressListener(imageView: ImageView) {

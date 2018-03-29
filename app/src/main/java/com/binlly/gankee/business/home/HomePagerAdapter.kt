@@ -2,14 +2,14 @@ package com.binlly.gankee.business.home
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import com.binlly.gankee.base.CacheFragmentStatePagerAdapter
 import com.binlly.gankee.business.girl.GirlFragment
 import com.binlly.gankee.business.mine.MineFragment
 
 /**
  * Created by yy on 2017/11/15.
  */
-class HomePagerAdapter(fm: FragmentManager):
-        com.binlly.gankee.base.CacheFragmentStatePagerAdapter(fm) {
+class HomePagerAdapter(fm: FragmentManager): CacheFragmentStatePagerAdapter(fm) {
 
     private val tabs = arrayOf("首页", "妹子", "我的")
     private val fragments = arrayOf(HomeFragment(), GirlFragment(), MineFragment())

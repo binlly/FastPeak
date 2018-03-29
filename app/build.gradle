@@ -21,19 +21,24 @@ kotlin {
 }
 
 android {
-
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
-
+    signingConfigs {
+        release {
+            keyAlias 'gankee'
+            keyPassword 'jiandan'
+            storeFile file('keystore')
+            storePassword 'jiandan'
+        }
+    }
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.binlly.gankee"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         debug {
             debuggable true
@@ -42,12 +47,13 @@ android {
         }
 
         release {
+            signingConfig signingConfigs.release //使用release签名
             debuggable false
             minifyEnabled true
+            zipAlignEnabled true //签名
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     sourceSets {
         main {
             res.srcDirs = [
@@ -56,12 +62,10 @@ android {
             ]
         }
     }
-
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
-
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -114,7 +118,7 @@ variants.all { variant ->
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:design:$support_version"
     implementation "com.android.support:recyclerview-v7:$support_version"
@@ -122,7 +126,7 @@ dependencies {
 
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.18"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.1'
 
     // anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
@@ -145,9 +149,9 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
     // https://github.com/bumptech/glide
-    implementation 'com.github.bumptech.glide:glide:4.0.0'
-    kapt 'com.github.bumptech.glide:compiler:4.0.0'
-    implementation "com.github.bumptech.glide:okhttp3-integration:4.0.0"
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.0.0'
 
     // event bus
     compile 'org.greenrobot:eventbus:3.0.0'
@@ -163,27 +167,24 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     // https://github.com/square/okhttp
-    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
 
     // https://github.com/vincentbrison/dualcache
     implementation 'com.vincentbrison.openlibraries.android:dualcache:3.1.1'
 
     // https://github.com/permissions-dispatcher/PermissionsDispatcher
-    implementation("com.github.hotchemi:permissionsdispatcher:2.4.0") {
+    implementation('com.github.hotchemi:permissionsdispatcher:2.4.0') {
         // if you don't use android.app.Fragment you can exclude support for them
         exclude module: "support-v13"
     }
     kapt "com.github.hotchemi:permissionsdispatcher-processor:2.4.0"
-
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
-
     implementation "org.aspectj:aspectjrt:$aspectj_version"
-
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.robolectric:robolectric:3.4.2'
-    testImplementation "org.mockito:mockito-core:2.6.5"
+    testImplementation 'org.robolectric:robolectric:3.6.1'
+    testImplementation 'org.mockito:mockito-core:2.7.1'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    androidTestImplementation "com.android.support.test:runner:1.0.1"
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

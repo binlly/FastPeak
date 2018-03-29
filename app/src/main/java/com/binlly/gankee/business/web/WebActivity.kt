@@ -1,5 +1,6 @@
 package com.binlly.gankee.business.web
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebChromeClient
@@ -35,6 +36,7 @@ class WebActivity: BaseActivity() {
         webview.loadUrl(url)
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView(webview: WebView) {
         webview.settings.javaScriptEnabled = true
         webview.settings.builtInZoomControls = true

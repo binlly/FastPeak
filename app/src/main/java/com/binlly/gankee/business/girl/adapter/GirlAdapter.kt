@@ -16,7 +16,7 @@ class GirlAdapter: QuickAdapter<FeedGirl, BaseViewHolder>(R.layout.item_home_gir
     private var carePos = -1
 
     companion object {
-        val ACTION_TO_PREVIEW = 1
+        const val ACTION_TO_PREVIEW = 1
     }
 
     override fun convert(holder: BaseViewHolder, item: FeedGirl) {

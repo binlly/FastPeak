@@ -46,7 +46,7 @@ object Device {
                 val e = context.getSystemService("phone") as TelephonyManager
                 imsi = e.subscriberId
             } catch (var3: Exception) {
-                logger.e("get IMSI error: " + var3)
+                logger.e("get IMSI error: $var3")
             }
 
             if (imsi == null) "" else imsi
@@ -67,7 +67,7 @@ object Device {
                 mac = mac.replace("\u0000".toRegex(), "")
                 mac = mac.replace("null".toRegex(), "")
             } catch (var5: Exception) {
-                logger.e("get local mac error " + var5)
+                logger.e("get local mac error $var5")
             }
 
             return if (TextUtils.isEmpty(mac)) "00:00:00:00:00:00" else mac
@@ -79,10 +79,10 @@ object Device {
             logger.e("context=null return APIV 0")
             return "0"
         } else {
-            val manager = context.getPackageManager()
+            val manager = context.packageManager
 
             try {
-                val e = manager.getApplicationInfo(context.getPackageName(), 128)
+                val e = manager.getApplicationInfo(context.packageName, 128)
                 val metaData = e.metaData
                 if (metaData != null) {
                     val apiv = metaData.getInt("APIV").toString()
@@ -97,17 +97,17 @@ object Device {
     }
 
     fun getAppVersion(context: Context?): String? {
-        if (context == null) {
-            return null
+        return if (context == null) {
+            null
         } else {
-            val manager = context.getPackageManager()
+            val manager = context.packageManager
 
             try {
-                val e = manager.getPackageInfo(context.getPackageName(), 0)
-                return e.versionName
+                val e = manager.getPackageInfo(context.packageName, 0)
+                e.versionName
             } catch (var3: Exception) {
                 logger.e("obtain app version error", var3)
-                return null
+                null
             }
         }
     }
@@ -125,13 +125,13 @@ object Device {
     }
 
     fun getAppStatus(context: Context): String {
-        try {
+        return try {
             val e = context.getSystemService("activity") as ActivityManager
             val cn = (e.getRunningTasks(1)[0] as RunningTaskInfo).topActivity
             val packageName = cn.packageName
-            return if (packageName == context.getPackageName()) "active" else "background"
+            if (packageName == context.packageName) "active" else "background"
         } catch (var4: Exception) {
-            return "other"
+            "other"
         }
     }
 
@@ -143,7 +143,7 @@ object Device {
                 return getNetwrokTypeStr(type)
             }
         } catch (var31: Exception) {
-            logger.e("check network error " + var31)
+            logger.e("check network error $var31")
         }
 
         return "UNKNOWN"
@@ -210,7 +210,7 @@ object Device {
                     builder.append(e1.simSerialNumber)
                 }
             } catch (var6: Exception) {
-                logger.e("getICCID error" + var6)
+                logger.e("getICCID error$var6")
             }
 
             return builder.toString()
@@ -219,8 +219,7 @@ object Device {
 
     private fun getNetworkInfo(context: Context?): NetworkInfo? {
         context ?: return null
-        val connectMgr = context.getSystemService(
-                Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return connectMgr.activeNetworkInfo
     }
 
@@ -240,12 +239,12 @@ object Device {
 
             while (en.hasMoreElements()) {
                 val networkInterface = en.nextElement() as NetworkInterface
-                val enumIpAddr = networkInterface.getInetAddresses()
+                val enumIpAddr = networkInterface.inetAddresses
 
                 while (enumIpAddr.hasMoreElements()) {
                     val inetAddress = enumIpAddr.nextElement() as InetAddress
-                    if (!inetAddress.isLoopbackAddress()) {
-                        return inetAddress.getHostAddress()
+                    if (!inetAddress.isLoopbackAddress) {
+                        return inetAddress.hostAddress
                     }
                 }
             }
@@ -255,7 +254,10 @@ object Device {
         return "0.0.0.0"
     }
 
-    private fun getNetworkType(context: Context?, info: NetworkInfo?): Int {
+    private fun getNetworkType(
+            context: Context?,
+            info: NetworkInfo?
+    ): Int {
 
         var type = NETWORKTYPE_UNKNOWN
 
@@ -279,7 +281,7 @@ object Device {
                 }
             }
 
-            logger.d("network type：" + subType)
+            logger.d("network type：$subType")
         }
 
         return type
@@ -303,9 +305,9 @@ object Device {
 
     class AppStatus {
         companion object {
-            val ACTIVE = "active"
-            val BACKGROUND = "background"
-            val OTHER = "other"
+            const val ACTIVE = "active"
+            const val BACKGROUND = "background"
+            const val OTHER = "other"
         }
     }
 }

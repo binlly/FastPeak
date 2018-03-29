@@ -33,8 +33,7 @@ class HistoryDelegate(val adapter: HistoryAdapter): ItemViewDelegate<FeedAll, Ba
             image.visibility = View.GONE
         } else {
             image.visibility = View.VISIBLE
-            val w = 80
-            val url = "${item.images[0]}?imageView2/0/w/${w.dp2px()}" //请求小图
+            val url = "${item.images[0]}?imageView2/0/w/${80.dp2px()}" //请求小图
             image.load(url)
         }
 

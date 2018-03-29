@@ -6,7 +6,7 @@ import com.binlly.gankee.base.rx.RxObserver
 import com.binlly.gankee.repo.HomeRepo
 
 class HomePresenter(
-        context: Context, mView: HomeContract.View
+        context: Context?, mView: HomeContract.View
 ): BaseFragmentPresenterImpl<HomeContract.View>(context, mView), HomeContract.Presenter {
 
     private var page = 1

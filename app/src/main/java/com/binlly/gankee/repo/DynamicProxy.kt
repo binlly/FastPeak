@@ -11,7 +11,8 @@ class DynamicProxy(private val target: Any, private val mockTarget: Any): Invoca
 
     private val TAG = DynamicProxy::class.java.simpleName
 
-    @Throws(Throwable::class) override fun invoke(
+    @Throws(Throwable::class)
+    override fun invoke(
             proxy: Any, method: Method, args: Array<Any>
     ): Any {
         before()
@@ -31,9 +32,7 @@ class DynamicProxy(private val target: Any, private val mockTarget: Any): Invoca
     }
 
     fun <T> getProxy(): T {
-        return Proxy.newProxyInstance(target.javaClass.classLoader,
-                target.javaClass.interfaces,
-                this) as T
+        return Proxy.newProxyInstance(target.javaClass.classLoader, target.javaClass.interfaces, this) as T
     }
 
     private fun before() {
