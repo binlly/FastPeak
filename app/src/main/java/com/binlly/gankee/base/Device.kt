@@ -97,17 +97,17 @@ object Device {
     }
 
     fun getAppVersion(context: Context?): String? {
-        if (context == null) {
-            return null
+        return if (context == null) {
+            null
         } else {
             val manager = context.packageManager
 
             try {
                 val e = manager.getPackageInfo(context.packageName, 0)
-                return e.versionName
+                e.versionName
             } catch (var3: Exception) {
                 logger.e("obtain app version error", var3)
-                return null
+                null
             }
         }
     }
@@ -125,13 +125,13 @@ object Device {
     }
 
     fun getAppStatus(context: Context): String {
-        try {
+        return try {
             val e = context.getSystemService("activity") as ActivityManager
             val cn = (e.getRunningTasks(1)[0] as RunningTaskInfo).topActivity
             val packageName = cn.packageName
-            return if (packageName == context.packageName) "active" else "background"
+            if (packageName == context.packageName) "active" else "background"
         } catch (var4: Exception) {
-            return "other"
+            "other"
         }
     }
 

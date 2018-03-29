@@ -67,8 +67,7 @@ class ReqParams(private val TAG: String) {
         // TODO: 2017/8/23 统一添加公共头
         // map.put("headers", new Gson().toJson(DeviceUtil.getCommonHeader()));
 
-        Log.d(TAG + "-param--", map["param"])
-        if (printHeaders) Log.w(TAG + "-headers--", map["headers"])
+        Log.d("$TAG-param--", map["param"])
 
         return map
     }
@@ -86,7 +85,5 @@ class ReqParams(private val TAG: String) {
         const val POST = "POST"
         const val PUT = "PUT"
         const val DELETE = "DELETE"
-
-        private const val printHeaders = false
     }
 }

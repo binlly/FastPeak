@@ -5,11 +5,9 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
 import com.binlly.gankee.R
-import com.binlly.gankee.base.glide.DisplayUtil
 import com.binlly.gankee.base.glide.progress.OnGlideImageViewListener
 import com.binlly.gankee.base.glide.progress.OnProgressListener
 import com.binlly.gankee.base.glide.progress.ProgressManager
-import com.binlly.gankee.service.Services
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.DataSource
@@ -26,16 +24,15 @@ import com.bumptech.glide.request.target.Target
 
 private val mMainHandler = Handler(Looper.getMainLooper())
 
-private val screenHeight = DisplayUtil.getScreenHeight(Services.app)
-private val screenWidth = DisplayUtil.getScreenWidth(Services.app)
-
 fun ImageView.loadNoCache(
         uri: Any?,
         holder: Int = getColor(R.color.place_holder),
         listener: OnGlideImageViewListener? = null,
         onReady: ((resource: Drawable?, e: GlideException?) -> Boolean)? = null
 ) {
-    val options = RequestOptions().placeholder(holder).error(holder).diskCacheStrategy(DiskCacheStrategy.NONE)
+    val options = RequestOptions().placeholder(holder)
+            .error(holder)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
     load(uri, options, null, listener, onReady)
 }
 
@@ -45,7 +42,9 @@ fun ImageView.loadCircle(
         listener: OnGlideImageViewListener? = null,
         onReady: ((resource: Drawable?, e: GlideException?) -> Boolean)? = null
 ) {
-    val options = RequestOptions().placeholder(holder).error(holder).circleCrop()
+    val options = RequestOptions().placeholder(holder)
+            .error(holder)
+            .circleCrop()
     load(uri, options, null, listener, onReady)
 }
 
@@ -55,21 +54,21 @@ fun ImageView.load(
         listener: OnGlideImageViewListener? = null,
         onReady: ((resource: Drawable?, e: GlideException?) -> Boolean)? = null
 ) {
-    val options = RequestOptions().placeholder(holder).error(holder)
+    val options = RequestOptions().placeholder(holder)
+            .error(holder)
     load(uri, options, null, listener, onReady)
 }
 
 //自动设置ImageView的宽高为下载的图片的宽高比，宽度为ImageView的最大宽度
 fun ImageView.loadAuto(
-        uri: Any?,
-        holder: Int = getColor(R.color.place_holder),
-        listener: OnGlideImageViewListener? = null
+        uri: Any?, holder: Int = getColor(R.color.place_holder), listener: OnGlideImageViewListener? = null
 ) {
-    val options = RequestOptions().placeholder(holder).error(holder)
+    val options = RequestOptions().placeholder(holder)
+            .error(holder)
     load(uri, options, null, listener) { resource, _ ->
         resource?.let {
             layoutParams.width = -1
-            layoutParams.height = ((screenWidth.toFloat() / resource.intrinsicWidth) * resource.intrinsicHeight).toInt()
+            layoutParams.height = ((context.getScreenWidth().toFloat() / resource.intrinsicWidth) * resource.intrinsicHeight).toInt()
             requestLayout()
         }
         return@load false
@@ -85,7 +84,10 @@ fun ImageView.load(
 ) {
     if (checkUriParams(uri)) addListener(this, listener)
 
-    val requestBuilder = Glide.with(context).load(uri).apply(options).thumbnail(thumbnail)
+    val requestBuilder = Glide.with(context)
+            .load(uri)
+            .apply(options)
+            .thumbnail(thumbnail)
     requestBuilder.listener(object: RequestListener<Drawable> {
         override fun onResourceReady(
                 resource: Drawable?,
@@ -100,30 +102,23 @@ fun ImageView.load(
         }
 
         override fun onLoadFailed(
-                e: GlideException?,
-                model: Any?,
-                target: Target<Drawable>?,
-                isFirstResource: Boolean
+                e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
         ): Boolean {
             listener?.let { ProgressManager.removeProgressListener(this@load) }
             onReady ?: return false
             return onReady(null, e)
         }
-    }).into(this)
+    })
+            .into(this)
 }
 
 private fun addListener(
-        imageView: ImageView,
-        listener: OnGlideImageViewListener?
+        imageView: ImageView, listener: OnGlideImageViewListener?
 ) {
     listener?.let {
         val internalProgressListener = object: OnProgressListener {
             override fun onProgress(
-                    imageUrl: String,
-                    bytesRead: Long,
-                    totalBytes: Long,
-                    isDone: Boolean,
-                    exception: GlideException?
+                    imageUrl: String, bytesRead: Long, totalBytes: Long, isDone: Boolean, exception: GlideException?
             ) {
                 mMainHandler.post {
                     val percent = (bytesRead * 1.0f / totalBytes * 100.0f).toInt()

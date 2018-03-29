@@ -18,7 +18,7 @@ var logLevel = LogLevel.DEBUG
 class Logger {
 
     private var TAG = "CUSTOM_LOGGER"
-    private var header: String? = ""
+    private var header: String = ""
 
     fun init(clazz: Class<*>): Logger {
         TAG = clazz.simpleName
@@ -38,7 +38,7 @@ class Logger {
      * header是自定义的内容，可以放App的信息版本号等，方便查找和调试
      * @param tag
      */
-    fun header(header: String?): Logger {
+    fun header(header: String): Logger {
         this.header = header
         return this
     }
@@ -222,59 +222,89 @@ class Logger {
                 println(String.format(s, message))
                 return
             }
-            e("Invalid Json: " + json)
+            e("Invalid Json: $json")
         } catch (e: JSONException) {
-            e("Invalid Json: " + json)
+            e("Invalid Json: $json")
         }
 
     }
 
     fun getMethodNames(): String {
-        val sElements = Thread.currentThread().stackTrace
+        val sElements = Thread.currentThread()
+                .stackTrace
 
         var stackOffset = LoggerPrinter.getStackOffset(sElements)
 
         stackOffset++
         val builder = StringBuilder()
 
-        if (header != null && header!!.isNotBlank()) {
-            builder.append(LoggerPrinter.TOP_BORDER).append("\r\n")
+        if (header.isNotBlank()) {
+            builder.append(LoggerPrinter.TOP_BORDER)
+                    .append("\r\n")
                     // 添加当前线程名
-                    .append("║ " + "header: " + header).append("\r\n").append(
-                    LoggerPrinter.MIDDLE_BORDER).append("\r\n")
+                    .append("║ header: $header")
+                    .append("\r\n")
+                    .append(LoggerPrinter.MIDDLE_BORDER)
+                    .append("\r\n")
                     // 添加当前线程名
-                    .append("║ " + "Thread: " + Thread.currentThread().name).append("\r\n").append(
-                    LoggerPrinter.MIDDLE_BORDER).append("\r\n")
+                    .append("║ " + "Thread: " + Thread.currentThread().name)
+                    .append("\r\n")
+                    .append(LoggerPrinter.MIDDLE_BORDER)
+                    .append("\r\n")
                     // 添加类名、方法名、行数
-                    .append("║ ").append(sElements[stackOffset].className).append(".").append(
-                    sElements[stackOffset].methodName).append(" ").append(" (").append(
-                    sElements[stackOffset].fileName).append(":").append(
-                    sElements[stackOffset].lineNumber).append(")").append("\r\n").append(
-                    LoggerPrinter.MIDDLE_BORDER).append("\r\n")
+                    .append("║ ")
+                    .append(sElements[stackOffset].className)
+                    .append(".")
+                    .append(sElements[stackOffset].methodName)
+                    .append(" ")
+                    .append(" (")
+                    .append(sElements[stackOffset].fileName)
+                    .append(":")
+                    .append(sElements[stackOffset].lineNumber)
+                    .append(")")
+                    .append("\r\n")
+                    .append(LoggerPrinter.MIDDLE_BORDER)
+                    .append("\r\n")
                     // 添加打印的日志信息
-                    .append("║ ").append("%s").append("\r\n").append(
-                    LoggerPrinter.BOTTOM_BORDER).append("\r\n")
+                    .append("║ ")
+                    .append("%s")
+                    .append("\r\n")
+                    .append(LoggerPrinter.BOTTOM_BORDER)
+                    .append("\r\n")
         } else {
-            builder.append(LoggerPrinter.TOP_BORDER).append("\r\n")
+            builder.append(LoggerPrinter.TOP_BORDER)
+                    .append("\r\n")
                     // 添加当前线程名
-                    .append("║ " + "Thread: " + Thread.currentThread().name).append("\r\n").append(
-                    LoggerPrinter.MIDDLE_BORDER).append("\r\n")
+                    .append("║ " + "Thread: " + Thread.currentThread().name)
+                    .append("\r\n")
+                    .append(LoggerPrinter.MIDDLE_BORDER)
+                    .append("\r\n")
                     // 添加类名、方法名、行数
-                    .append("║ ").append(sElements[stackOffset].className).append(".").append(
-                    sElements[stackOffset].methodName).append(" ").append(" (").append(
-                    sElements[stackOffset].fileName).append(":").append(
-                    sElements[stackOffset].lineNumber).append(")").append("\r\n").append(
-                    LoggerPrinter.MIDDLE_BORDER).append("\r\n")
+                    .append("║ ")
+                    .append(sElements[stackOffset].className)
+                    .append(".")
+                    .append(sElements[stackOffset].methodName)
+                    .append(" ")
+                    .append(" (")
+                    .append(sElements[stackOffset].fileName)
+                    .append(":")
+                    .append(sElements[stackOffset].lineNumber)
+                    .append(")")
+                    .append("\r\n")
+                    .append(LoggerPrinter.MIDDLE_BORDER)
+                    .append("\r\n")
                     // 添加打印的日志信息
-                    .append("║ ").append("%s").append("\r\n").append(
-                    LoggerPrinter.BOTTOM_BORDER).append("\r\n")
+                    .append("║ ")
+                    .append("%s")
+                    .append("\r\n")
+                    .append(LoggerPrinter.BOTTOM_BORDER)
+                    .append("\r\n")
         }
 
         return builder.toString()
     }
 
-    private fun log(msg: String?, tag: String? = TAG, tr: Throwable? = null,
-                    level: LogLevel = LogLevel.DEBUG) {
+    private fun log(msg: String?, tag: String? = TAG, tr: Throwable? = null, level: LogLevel = LogLevel.DEBUG) {
         if (LogLevel.ERROR.value > logLevel.value) return
 
         msg ?: return
