@@ -5,13 +5,13 @@ buildscript {
     ext.kotlin_version = '1.2.50'
     ext.anko_version = '0.10.5'
     ext.retrofit_version = '2.4.0'
-    ext.dagger_version = '2.11'
+    ext.dagger_version = '2.16'
     ext.aspectj_version = '1.8.9'
 
     repositories {
-        google()
         jcenter()
         mavenCentral()
+        google()
         maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
@@ -35,9 +35,9 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         jcenter()
         mavenCentral()
+        google()
         maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
