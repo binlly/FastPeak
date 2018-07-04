@@ -54,18 +54,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
-        main {
-            res.srcDirs = [
-                    // 'src/main/kotlin',
-                    'src/main/res'
-            ]
-        }
+        main.java.srcDirs += 'src/main/java'
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        main.res.srcDirs += 'src/main/res'
     }
+
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
+
     testOptions {
         unitTests.returnDefaultValues = true
     }
