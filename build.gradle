@@ -2,11 +2,11 @@
 
 buildscript {
     ext.support_version = '27.1.1'
-    ext.kotlin_version = '1.2.50'
+    ext.kotlin_version = '1.2.51'
     ext.anko_version = '0.10.5'
     ext.retrofit_version = '2.4.0'
     ext.dagger_version = '2.16'
-    ext.aspectj_version = '1.8.9'
+    ext.aspectj_version = '1.9.1'
 
     repositories {
         jcenter()
